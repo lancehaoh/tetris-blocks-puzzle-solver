@@ -6,7 +6,7 @@ Rules for challenge:
 
 1. Fit all 12 blocks into the grid with no overlaps.
 
-2. Each block can be rotated up to 180 degrees in any direction.
+2. Each block can be rotated 90 or 180 degrees in any direction.
 
 3. No reflection allowed on the blocks. (i.e. |__ cannot be transformed to __| )
 
