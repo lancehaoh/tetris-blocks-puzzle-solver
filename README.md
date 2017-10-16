@@ -28,3 +28,8 @@ ________________________________________________________________________________
 The input for this puzzle is defined in the file "in"
 
 The solver outputs the solution to the puzzle as a character matrix, representing different blocks as different characters. See solution.png for the actual colored solution.
+
+To run the solver, a C++ compiler is required to compile the code.
+Then put "solver.cpp" and "in" into the same directory and perform the following command:
+
+./solver < in
