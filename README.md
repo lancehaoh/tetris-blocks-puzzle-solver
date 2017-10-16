@@ -2,6 +2,15 @@
 
 Solver for Cluefinders 4th grade adventure tetris-blocks-puzzle challenge (see "puzzle.jpg").
 
+Rules for challenge:
+
+1. Fit all 12 blocks into the grid with no overlaps.
+
+2. Each block can be rotated up to 180 degrees in any direction.
+
+3. No reflection allowed on the blocks. (i.e. |__ cannot be transformed to __| )
+
+
 Input file format is as follows:
 
 ___________________________________________________________________________________________________________
@@ -33,3 +42,5 @@ To run the solver, a C++ compiler is required to compile the code.
 Then put "solver.cpp" and "in" into the same directory and perform the following command:
 
 ./solver < in
+
+Runtime: the solver solves the given puzzle in 42 seconds on a 2015 Macbook Air with a 1.6 Ghz Intel Core i5 processor.
