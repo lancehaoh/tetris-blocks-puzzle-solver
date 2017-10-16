@@ -15,14 +15,14 @@ struct Block {
 		for(int i = 0; i < 5; i++) {
 			for(int j = 0; j < 5; j++) {
 				mat[i][j] = m[i][j];
-				if(mat[i][j] == 'x') {
+				if(m[i][j] == 'x') {
 					u++;
 				}
 			}
 		}
-		c = cc;
-		w = ww;
 		h = hh;
+		w = ww;
+		c = cc;
 		make();
 	}
 
@@ -161,27 +161,6 @@ bool solve(vector<Block> &blocks,Grid &g,int t,int cur=0) {
 	return false;
 }
 
-vector<int> gen(vector<Block> &blocks,int t) {
-	int n = (int) blocks.size();
-	vector<int> bitmasks;
-
-	for(int i = 1; i < (1<<n); i++) {
-		int sum = 0;
-		for(int j = 0; (1<<j) <= i; j++) {
-			if(i&(1<<j)) {
-				sum += blocks[j].u;
-				if(sum > t) {
-					break;
-				}
-			}
-		}
-		if(sum == t) {
-			bitmasks.push_back(i);
-		}
-	}
-	return bitmasks;
-}
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
@@ -205,19 +184,8 @@ int main() {
 		}
 		blocks.push_back(Block(mat,h,w,i));
 	}
-
-	vector<int> bitmasks = gen(blocks,n*m);
-
-	for(int i = 0; i < (int) bitmasks.size(); i++) {
-		vector<Block> curBlocks;
-		for(int j = 0; (1<<j) <= bitmasks[i]; j++) {
-			if(bitmasks[i] & (1<<j)) {
-				curBlocks.push_back(blocks[j]);
-			}
-		}
-		if(solve(curBlocks,g,n*m)) {
-			return 0;
-		}
+	if(solve(blocks,g,n*m)) {
+		return 0;
 	}
 	cout << "unable to find solution" << "\n";
 	return 0;
