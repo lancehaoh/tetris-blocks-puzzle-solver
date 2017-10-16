@@ -6,13 +6,21 @@ Input file format is as follows:
 
 ___________________________________________________________________________________________________________
 height_of_grid width_of_grid
+
 number_of_blocks
+
 height_of_first_block width_of_first_block
+
 5x5 matrix representing the block (use 'x' if the cell is part of the shape's outline. 'o' otherwise.)
+
 .
+
 .
+
 .
+
 height_of_last_block width_of_last_block
+
 5x5 matrix representing the block
 
 ___________________________________________________________________________________________________________
