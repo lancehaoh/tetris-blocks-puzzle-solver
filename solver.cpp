@@ -8,6 +8,8 @@ using namespace std;
 struct Block {
 	char mat[5][5];
 	char pat[5][5];
+	vector<Block> patArr;
+
 	int v, w, h, c, u;
 
 	Block(char m[5][5],int hh,int ww,int cc) {
@@ -60,6 +62,42 @@ struct Block {
 				pat[i-tr][j-tc] = mat[i][j];
 			}
 		}
+	}
+
+	void preprocess() {
+		vector<Block> tmp;
+		for(int i = 0; i < 4; i++) {
+			tmp.push_back(Block(mat,h,w,c));
+			if(i < 3) {
+				rotate();
+			}
+		}
+		if(isEqual(tmp[0],tmp[1])) {
+			patArr.push_back(tmp[0]);
+			return;
+		}
+		if(!isEqual(tmp[0],tmp[2])) {
+			patArr.push_back(tmp[0]);
+		}
+		patArr.push_back(tmp[2]);
+		if(!isEqual(tmp[1],tmp[3])) {
+			patArr.push_back(tmp[1]);
+		}
+		patArr.push_back(tmp[3]);
+	}
+
+	bool isEqual(Block& a,Block &b) {
+		if(a.h != b.h || a.w != b.w) {
+			return false;
+		}
+		for(int i = 0; i < a.h; i++) {
+			for(int j = 0; j < a.w; j++) {
+				if(a.pat[i][j] != b.pat[i][j]) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	void print() {
@@ -147,16 +185,16 @@ bool solve(vector<Block> &blocks,Grid &g,int t,int cur=0) {
 		g.print();
 		return true;
 	}
-	for(int c = 0; c < 4; c++) {
-		vector< pair<int,int> > occ = bruteforce(g,blocks[cur]);
+	vector<Block> patArr = blocks[cur].patArr;
+	for(int c = 0; c < (int) patArr.size(); c++) {
+		vector< pair<int,int> > occ = bruteforce(g,patArr[c]);
 		for(int i = 0; i < (int) occ.size(); i++) {
-			g.color(blocks[cur],occ[i].first,occ[i].second);
-			if(solve(blocks,g,t-blocks[cur].u,cur+1)) {
+			g.color(patArr[c],occ[i].first,occ[i].second);
+			if(solve(blocks,g,t-patArr[c].u,cur+1)) {
 				return true;
 			}
-			g.color(blocks[cur],occ[i].first,occ[i].second,1);
+			g.color(patArr[c],occ[i].first,occ[i].second,1);
 		}
-		blocks[cur].rotate();
 	}
 	return false;
 }
@@ -183,6 +221,7 @@ int main() {
 			}
 		}
 		blocks.push_back(Block(mat,h,w,i));
+		blocks[i].preprocess();
 	}
 	if(solve(blocks,g,n*m)) {
 		return 0;
