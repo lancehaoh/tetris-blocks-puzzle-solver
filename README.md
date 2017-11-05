@@ -43,4 +43,4 @@ Then put "solver.cpp" and "in" into the same directory and perform the following
 
 ./solver < in
 
-Runtime: the solver solves the given puzzle in 42 seconds on a 2015 Macbook Air with a 1.6 Ghz Intel Core i5 processor.
+Runtime: the solver solves the given puzzle in 5 seconds on a 2015 Macbook Air with a 1.6 Ghz Intel Core i5 processor.
